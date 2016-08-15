@@ -1,0 +1,37 @@
+SPBRG=D'25'
+
+TXSTA
+CSRC=0,TX9=0,TXEN=?,SYNC=0,___,BRGH=1,TRMT=?,TX9D
+TXEN bit enables transmissions,if the serial port has been enabled(1)
+TRMT bit indicates that there is data in the transmit shift register(0)
+
+RCSTA
+SPEN=?,RX9=0,SREN,CREN=?,ADDEN=0,FERR,OERR,RX9D
+SPEN bit enables serial port(1&0)
+CREN bit enables receieve data when it is set(1)
+
+SPBRG
+#baud rate generator
+
+TXREG
+
+RCREG
+
+PIR1
+RCIF=?(bit5),TXIF=?(b4),
+RCIF bit gets set when new data is received(-)
+TXIF bit gets set when data is transmitted(-)
+
+PIE1
+0,0,RCIE=?(bit5),TXIE=?(bit4),0,0,0,0
+RCIE bit should be cleared to stop interrupts occurring when receiving (1&0)
+TXIE bit should be cleared to stop interrupts occurring when transmitting(1&0)
+
+#also INTCON register used to control interrupts;
+
+INTCON
+GIE=1,PEIE=1,0,0,0,0,0,0
+GIE: global interruptenable bit
+PEIE: peripheral interrupt enable bit
+
+
